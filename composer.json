@@ -1,0 +1,22 @@
+{
+    "name": "aldoanizio/makobooster",
+    "type": "mako-package",
+    "description": "Provides extra functions to Mako Framework",
+    "keywords": ["mako", "framework", "validators"],
+    "homepage": "https://github.com/aldoanizio/makobooster",
+    "authors": [
+        {
+            "name": "Aldo Anizio Lugão Camacho",
+            "email": "aldoanizio@yahoo.com.br",
+            "homepage": "http://www.visualcode.com.br"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "makobooster\\": "classes"
+        }
+    },
+    "require": {
+        "composer/installers": "*"
+    }
+}

@@ -23,6 +23,14 @@ class ConfigExistsValidator extends \mako\validator\plugins\ValidatorPlugin impl
     //---------------------------------------------
 
     /**
+     * Package name.
+     *
+     * @var string
+     */
+
+    protected $packageName = 'makobooster';
+
+    /**
      * Rule name.
      *
      * @var string

@@ -20,6 +20,14 @@ class CNPJValidator extends \mako\validator\plugins\ValidatorPlugin implements \
     //---------------------------------------------
 
     /**
+     * Package name.
+     *
+     * @var string
+     */
+
+    protected $packageName = 'makobooster';
+
+    /**
      * Rule name.
      *
      * @var string

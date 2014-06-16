@@ -20,6 +20,14 @@ class CPFValidator extends \mako\validator\plugins\ValidatorPlugin implements \m
     //---------------------------------------------
 
     /**
+     * Package name.
+     *
+     * @var string
+     */
+
+    protected $packageName = 'makobooster';
+
+    /**
      * Rule name.
      *
      * @var string

@@ -12,7 +12,7 @@ use \mako\config\Config;
 /**
  * Config exists plugin.
  *
- * @author Frederic G. Østby
+ * @author Aldo Anizio Lugão Camacho
  */
 
 class ConfigExistsValidator extends \mako\validator\plugins\ValidatorPlugin implements \mako\validator\plugins\ValidatorPluginInterface
@@ -54,7 +54,7 @@ class ConfigExistsValidator extends \mako\validator\plugins\ValidatorPlugin impl
      * Constructor.
      *
      * @access  public
-     * @param   \mako\core\Config $config Config instance
+     * @param   \mako\core\Config  $config  Config instance
      */
 
     public function __construct(Config $config)

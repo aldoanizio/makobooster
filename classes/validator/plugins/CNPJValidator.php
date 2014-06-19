@@ -89,7 +89,7 @@ class CNPJValidator extends \mako\validator\plugins\ValidatorPlugin implements \
 
         // Percorrendo a parte invertida para obter o fator de calculo do 1º dígito verificador
 
-        for ($i = 0; $i <= 11; $i++)
+        for($i = 0; $i <= 11; $i++)
         {
             $multiplicador = ($i == 0) || ($i == 8) ? 2 : $multiplicador;
 
@@ -118,7 +118,7 @@ class CNPJValidator extends \mako\validator\plugins\ValidatorPlugin implements \
 
         // Mais uma vez percorre a parte invertida para obter o fator de calculo do 2º dígito verificador
 
-        for ($i = 0; $i <= 12; $i++)
+        for($i = 0; $i <= 12; $i++)
         {
             $multiplicador = ($i == 0) || ($i == 8) ? 2 : $multiplicador;
 

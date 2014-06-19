@@ -17,6 +17,8 @@ return
     'less_than_or_equal_to_field'    => 'O valor do campo %1$s deve ser menor ou igual ao campo %2$s.',
     'greater_than_field'             => 'O valor do campo %1$s deve ser maior que o campo %2$s.',
     'greater_than_or_equal_to_field' => 'O valor do campo %1$s deve ser maior ou igual ao campo %2$s.',
+    'between_fields'                 => 'O valor do campo %1$s deve estar entre os valores dos campos %2$s e %3$s.',
+    'unique'                         => 'O conteúdo do campo %1$s já existe.',
 
 
     /**

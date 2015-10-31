@@ -4,15 +4,13 @@
  * @copyright  Aldo Anizio Lugão Camacho
  * @license    http://www.makoframework.com/license
  */
-
-namespace makobooster\validator\plugins;
+namespace aldoanizio\makobooster\validator\plugins;
 
 /**
  * Validador de CPF.
  *
  * @author  Aldo Anizio Lugão Camacho
  */
-
 class CPFValidator extends \mako\validator\plugins\ValidatorPlugin implements \mako\validator\plugins\ValidatorPluginInterface
 {
     //---------------------------------------------
@@ -24,7 +22,6 @@ class CPFValidator extends \mako\validator\plugins\ValidatorPlugin implements \m
      *
      * @var string
      */
-
     protected $packageName = 'makobooster';
 
     /**
@@ -32,7 +29,6 @@ class CPFValidator extends \mako\validator\plugins\ValidatorPlugin implements \m
      *
      * @var string
      */
-
     protected $ruleName = 'cpf';
 
     //---------------------------------------------
@@ -43,16 +39,14 @@ class CPFValidator extends \mako\validator\plugins\ValidatorPlugin implements \m
      * Validator.
      *
      * @access  public
-     * @param   string   $input       Input
-     * @param   array    $parameters  Parameters
+     * @param   string   $input  Input value
      * @return  boolean
      */
-
-    public function validate($input, $parameters)
+    public function validate($input)
     {
         // Verifiva se o número digitado contém todos os digitos
 
-        $cpf = preg_replace("/[^0-9]/", '', trim($input));
+        $cpf = preg_replace('/[^0-9]/', '', trim($input));
 
         // Sequencias não permitidas
 

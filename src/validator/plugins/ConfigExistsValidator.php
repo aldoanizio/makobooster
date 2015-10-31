@@ -5,7 +5,7 @@
  * @license    http://www.makoframework.com/license
  */
 
-namespace makobooster\validator\plugins;
+namespace aldoanizio\makobooster\validator\plugins;
 
 use \mako\config\Config;
 
@@ -70,20 +70,13 @@ class ConfigExistsValidator extends \mako\validator\plugins\ValidatorPlugin impl
      * Validator.
      *
      * @access  public
-     * @param   string   $input       Input
-     * @param   array    $parameters  Parameters
+     * @param   string   $input   Input
+     * @param   string   $config  Config key to match result
      * @return  boolean
      */
 
-    public function validate($input, $parameters)
+    public function validate($input, $config)
     {
-        if(empty($parameters[1]) || $parameters[1] != true)
-        {
-            return (in_array($input, $this->config->get($parameters[0])));
-        }
-        else
-        {
-            return (array_key_exists($input, $this->config->get($parameters[0])));
-        }
+        return (in_array($input, $this->config->get($config)));
     }
 }

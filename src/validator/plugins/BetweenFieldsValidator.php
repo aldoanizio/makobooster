@@ -5,17 +5,17 @@
  * @license    http://www.makoframework.com/license
  */
 
-namespace makobooster\validator\plugins;
+namespace aldoanizio\makobooster\validator\plugins;
 
 use mako\http\Request;
 
 /**
- * Validador Less Than Field.
+ * Validador Between Fields.
  *
  * @author  Aldo Anizio Lugão Camacho
  */
 
-class LessThanFieldValidator extends \mako\validator\plugins\ValidatorPlugin implements \mako\validator\plugins\ValidatorPluginInterface
+class BetweenFieldsValidator extends \mako\validator\plugins\ValidatorPlugin implements \mako\validator\plugins\ValidatorPluginInterface
 {
     //---------------------------------------------
     // Class properties
@@ -35,7 +35,7 @@ class LessThanFieldValidator extends \mako\validator\plugins\ValidatorPlugin imp
      * @var string
      */
 
-    protected $ruleName = 'less_than_field';
+    protected $ruleName = 'between_fields';
 
     /**
      * Request instance.
@@ -69,13 +69,14 @@ class LessThanFieldValidator extends \mako\validator\plugins\ValidatorPlugin imp
      * Validator.
      *
      * @access  public
-     * @param   string   $input       Input
-     * @param   array    $parameters  Parameters
+     * @param   string   $input  Input value
+     * @param   array    $min    Minor field
+     * @param   array    $max    Max field
      * @return  boolean
      */
 
-    public function validate($input, $parameters)
+    public function validate($input, $min, $max)
     {
-        return ($input < $this->request->post($parameters[0]));
+        return ($input >= $this->request->post($min) && $input <= $this->request->post($max));
     }
 }

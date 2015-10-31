@@ -5,17 +5,17 @@
  * @license    http://www.makoframework.com/license
  */
 
-namespace makobooster\validator\plugins;
+namespace aldoanizio\makobooster\validator\plugins;
 
 use mako\http\Request;
 
 /**
- * Validador Between Fields.
+ * Validador Less Than Field.
  *
  * @author  Aldo Anizio Lugão Camacho
  */
 
-class BetweenFieldsValidator extends \mako\validator\plugins\ValidatorPlugin implements \mako\validator\plugins\ValidatorPluginInterface
+class LessThanFieldValidator extends \mako\validator\plugins\ValidatorPlugin implements \mako\validator\plugins\ValidatorPluginInterface
 {
     //---------------------------------------------
     // Class properties
@@ -35,7 +35,7 @@ class BetweenFieldsValidator extends \mako\validator\plugins\ValidatorPlugin imp
      * @var string
      */
 
-    protected $ruleName = 'between_fields';
+    protected $ruleName = 'less_than_field';
 
     /**
      * Request instance.
@@ -69,13 +69,18 @@ class BetweenFieldsValidator extends \mako\validator\plugins\ValidatorPlugin imp
      * Validator.
      *
      * @access  public
-     * @param   string   $input       Input
-     * @param   array    $parameters  Parameters
+     * @param   string   $input  Input value
+     * @param   array    $field  Comparison field
      * @return  boolean
      */
 
-    public function validate($input, $parameters)
+    public function validate($input, $field)
     {
-        return ($input >= $this->request->post($parameters[0]) && $input <= $this->request->post($parameters[0]));
+        if($this->request->post($field))
+        {
+            return ($input < $this->request->post($field));
+        }
+
+        return true;
     }
 }

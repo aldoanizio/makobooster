@@ -5,12 +5,13 @@
  * @license    http://www.makoframework.com/license
  */
 
-namespace makobooster\auth\providers;
+namespace aldoanizio\makobooster\auth\providers;
 
 use \Closure;
 
-use \mako\auth\user\UserInterface;
-use \mako\security\Password;
+use mako\auth\user\UserInterface;
+use mako\chrono\Time;
+use mako\security\Password;
 
 /**
  * User provider.
@@ -93,7 +94,7 @@ class UserProvider implements \mako\auth\providers\UserProviderInterface
     {
         $model = $this->model;
 
-        return $this->queryUser($model::where('action_token', '=', $token))->first();
+        return $model::where('action_token', '=', $token)->first();
     }
 
     /**
@@ -108,7 +109,7 @@ class UserProvider implements \mako\auth\providers\UserProviderInterface
     {
         $model = $this->model;
 
-        return $this->queryUser($model::where('access_token', '=', $token))->first();
+        return $model::where('access_token', '=', $token)->first();
     }
 
     /**
@@ -127,6 +128,21 @@ class UserProvider implements \mako\auth\providers\UserProviderInterface
     }
 
     /**
+     * Fetches a user by its username.
+     *
+     * @access  public
+     * @param   string                                 $username  User username
+     * @return  \mako\auth\user\UserInterface|boolean
+     */
+
+    public function getByUsername($username)
+    {
+        $model = $this->model;
+
+        return $this->queryUser($model::where('username', '=', $username))->first();
+    }
+
+    /**
      * Fetches a user by its id.
      *
      * @access  public
@@ -139,6 +155,70 @@ class UserProvider implements \mako\auth\providers\UserProviderInterface
         $model = $this->model;
 
         return $this->queryUser($model::where('id', '=', $id))->first();
+    }
+
+    /**
+     * Throttles login attempts.
+     *
+     * @access  public
+     * @param   \mako\auth\user\UserInterface  $user              User object
+     * @param   int                            $maxLoginAttempts  Maximum number of failed login attempts
+     * @param   int                            $lockTime          Number of seconds for which the account gets locked after reaching the maximum number of login attempts
+     * @return  boolean
+     */
+
+    public function throttle(UserInterface $user, $maxLoginAttempts, $lockTime)
+    {
+        $now = Time::now();
+
+        // Reset the failed attempt count if the last failed attempt was more than $lockTime seconds ago
+
+        if(($lastFailAt = $user->getLastFailAt()) !== null)
+        {
+            if(($now->getTimestamp() - $lastFailAt->getTimestamp()) > $lockTime)
+            {
+                $user->resetFailedAttempts();
+            }
+        }
+
+        // Increment the failed attempt count and update the last fail time
+
+        $user->incrementFailedAttempts();
+
+        $user->setLastFailAt($now);
+
+        // Lock the account for $lockTime seconds if we have exeeded the maximum number of login attempts
+
+        if($user->getFailedAttempts() >= $maxLoginAttempts)
+        {
+            $user->lockUntil(Time::now()->forward($lockTime));
+        }
+
+        // Save the changes to the user
+
+        return $user->save();
+    }
+
+    /**
+     * Resets the login throttling.
+     *
+     * @access  public
+     * @param   \mako\auth\user\UserInterface  $user  User object
+     * @return  boolean
+     */
+
+    public function resetThrottle(UserInterface $user)
+    {
+        if($user->getFailedAttempts() > 0)
+        {
+            $user->resetFailedAttempts();
+
+            $user->unlock();
+
+            return $user->save();
+        }
+
+        return true;
     }
 
     /**

@@ -5,17 +5,17 @@
  * @license    http://www.makoframework.com/license
  */
 
-namespace makobooster\validator\plugins;
+namespace aldoanizio\makobooster\validator\plugins;
 
 use \mako\database\ConnectionManager;
 
 /**
- * Database exists plugin.
+ * Database unique plugin.
  *
  * @author  Aldo Anizio Lugão Camacho
  */
 
-class DatabaseExistsValidator extends \mako\validator\plugins\ValidatorPlugin implements \mako\validator\plugins\ValidatorPluginInterface
+class DatabaseUniqueValidator extends \mako\validator\plugins\ValidatorPlugin implements \mako\validator\plugins\ValidatorPluginInterface
 {
 
     //---------------------------------------------
@@ -36,7 +36,7 @@ class DatabaseExistsValidator extends \mako\validator\plugins\ValidatorPlugin im
      * @var string
      */
 
-    protected $ruleName = 'exists';
+    protected $ruleName = 'unique';
 
     /**
      * Connection manager instance.
@@ -70,32 +70,38 @@ class DatabaseExistsValidator extends \mako\validator\plugins\ValidatorPlugin im
      * Validator.
      *
      * @access  public
-     * @param   string   $input       Input
-     * @param   array    $parameters  Parameters
+     * @param   string   $input   Input
+     * @param   string   $table   Table name
+     * @param   string   $column  Column name
+     * @param   string   $value   Allowed value
+     * @param   array    $conditional  (optional) Query conditionals
      * @return  boolean
      */
 
-    public function validate($input, $parameters)
+    public function validate($input, $table, $column, $value = null, $conditionals = [])
     {
-        $query = $this->connectionManager->builder()->table($parameters[0])->where($parameters[1], '=', $input);
+        $query = $this->connectionManager->builder()->table($table)->where($column, '=', $input);
+
+        // Ignore a given value
+
+        if(!empty($value))
+        {
+            $query->where($column, '!=', $value);
+        }
 
         // Additional clauses
 
-        for($i = 2; $i < count($parameters); $i++)
+        foreach($conditionals as $conditional)
         {
             // Explode clauses
 
-            list($field, $clauses) = explode('(', $parameters[$i], 2);
-
-            // Explode clauses
-
-            list($conditional, $value) = explode(':', rtrim($clauses, ')'), 2);
+            list($field, $conditional, $value) = explode(' ', $conditional);
 
             // Perform query
 
             $query->where($field, $conditional, $value);
         }
 
-        return ($query->count() != 0);
+        return ($query->count() == 0);
     }
 }

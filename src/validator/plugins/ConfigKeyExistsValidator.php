@@ -5,18 +5,19 @@
  * @license    http://www.makoframework.com/license
  */
 
-namespace makobooster\validator\plugins;
+namespace aldoanizio\makobooster\validator\plugins;
 
-use mako\http\Request;
+use \mako\config\Config;
 
 /**
- * Validador Less Than Or Equal To Field.
+ * Config exists plugin.
  *
- * @author  Aldo Anizio Lugão Camacho
+ * @author Aldo Anizio Lugão Camacho
  */
 
-class LessThanOrEqualToFieldValidator extends \mako\validator\plugins\ValidatorPlugin implements \mako\validator\plugins\ValidatorPluginInterface
+class ConfigKeyExistsValidator extends \mako\validator\plugins\ValidatorPlugin implements \mako\validator\plugins\ValidatorPluginInterface
 {
+
     //---------------------------------------------
     // Class properties
     //---------------------------------------------
@@ -35,15 +36,15 @@ class LessThanOrEqualToFieldValidator extends \mako\validator\plugins\ValidatorP
      * @var string
      */
 
-    protected $ruleName = 'less_than_or_equal_to_field';
+    protected $ruleName = 'config_key_exists';
 
     /**
-     * Request instance.
+     * Config instance.
      *
-     * @var mako\http\Request
+     * @var \mako\core\Config
      */
 
-    protected $request;
+    protected $config;
 
     //---------------------------------------------
     // Class constructor, destructor etc ...
@@ -53,12 +54,12 @@ class LessThanOrEqualToFieldValidator extends \mako\validator\plugins\ValidatorP
      * Constructor.
      *
      * @access  public
-     * @param   mako\http\Request  $request  Request instance
+     * @param   \mako\core\Config  $config  Config instance
      */
 
-    public function __construct(Request $request)
+    public function __construct(Config $config)
     {
-        $this->request = $request;
+        $this->config = $config;
     }
 
     //---------------------------------------------
@@ -69,13 +70,13 @@ class LessThanOrEqualToFieldValidator extends \mako\validator\plugins\ValidatorP
      * Validator.
      *
      * @access  public
-     * @param   string   $input       Input
-     * @param   array    $parameters  Parameters
+     * @param   string   $input   Input
+     * @param   string   $config  Array key to match result
      * @return  boolean
      */
 
-    public function validate($input, $parameters)
+    public function validate($input, $config)
     {
-        return ($input <= $this->request->post($parameters[0]));
+        return (array_key_exists($input, $this->config->get($config)));
     }
 }

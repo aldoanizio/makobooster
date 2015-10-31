@@ -4,15 +4,13 @@
  * @copyright  Aldo Anizio Lugão Camacho
  * @license    http://www.makoframework.com/license
  */
-
-namespace makobooster\validator\plugins;
+namespace aldoanizio\makobooster\validator\plugins;
 
 /**
  * Validador de CNPJ.
  *
  * @author  Aldo Anizio Lugão Camacho
  */
-
 class CNPJValidator extends \mako\validator\plugins\ValidatorPlugin implements \mako\validator\plugins\ValidatorPluginInterface
 {
     //---------------------------------------------
@@ -24,7 +22,6 @@ class CNPJValidator extends \mako\validator\plugins\ValidatorPlugin implements \
      *
      * @var string
      */
-
     protected $packageName = 'makobooster';
 
     /**
@@ -32,7 +29,6 @@ class CNPJValidator extends \mako\validator\plugins\ValidatorPlugin implements \
      *
      * @var string
      */
-
     protected $ruleName = 'cnpj';
 
     //---------------------------------------------
@@ -43,12 +39,10 @@ class CNPJValidator extends \mako\validator\plugins\ValidatorPlugin implements \
      * Validator.
      *
      * @access  public
-     * @param   string   $input       Input
-     * @param   array    $parameters  Parameters
+     * @param   string   $input  Input value
      * @return  boolean
      */
-
-    public function validate($input, $parameters)
+    public function validate($input)
     {
         // Iniciar variaveis
 

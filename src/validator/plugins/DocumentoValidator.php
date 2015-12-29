@@ -7,11 +7,11 @@
 namespace aldoanizio\makobooster\validator\plugins;
 
 /**
- * Validador de CNPJ.
+ * Validador de CPF/CNPJ.
  *
  * @author  Aldo Anizio Lugão Camacho
  */
-class CNPJValidator extends \mako\validator\plugins\ValidatorPlugin implements \mako\validator\plugins\ValidatorPluginInterface
+class DocumentoValidator extends \mako\validator\plugins\ValidatorPlugin implements \mako\validator\plugins\ValidatorPluginInterface
 {
     //---------------------------------------------
     // Class traits
@@ -35,7 +35,7 @@ class CNPJValidator extends \mako\validator\plugins\ValidatorPlugin implements \
      *
      * @var string
      */
-    protected $ruleName = 'cnpj';
+    protected $ruleName = 'cpf_cnpj';
 
     //---------------------------------------------
     // Class methods
@@ -50,6 +50,6 @@ class CNPJValidator extends \mako\validator\plugins\ValidatorPlugin implements \
      */
     public function validate($input)
     {
-        return $this->validarCNPJ($input);
+        return ($this->validarCPF($input) == true || $this->validarCNPJ($input) == true);
     }
 }

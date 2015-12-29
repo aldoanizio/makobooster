@@ -72,6 +72,8 @@ class MakoboosterPackage extends \mako\application\Package
 
         $validator->registerPlugin(new \aldoanizio\makobooster\validator\plugins\CNPJValidator);
 
+        $validator->registerPlugin(new \aldoanizio\makobooster\validator\plugins\DocumentoValidator);
+
         $validator->registerPlugin(new \aldoanizio\makobooster\validator\plugins\ConfigExistsValidator($config));
 
         $validator->registerPlugin(new \aldoanizio\makobooster\validator\plugins\ConfigKeyExistsValidator($config));

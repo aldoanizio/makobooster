@@ -12,6 +12,7 @@ return
 
     'cpf'                            => 'O valor do campo %1$s deve conter um número de CPF válido.',
     'cnpj'                           => 'O valor do campo %1$s deve conter um número de CNPJ válido.',
+    'cpf_cnpj'                       => 'O valor do campo %1$s deve conter um número de CPF ou CNPJ válido.',
     'config_exists'                  => 'O conteúdo do campo %1$s não existe.',
     'less_than_field'                => 'O valor do campo %1$s deve ser menor que o campo %2$s.',
     'less_than_or_equal_to_field'    => 'O valor do campo %1$s deve ser menor ou igual ao campo %2$s.',
@@ -30,8 +31,9 @@ return
     [
         'fieldnames' =>
         [
-            'cpf'  => 'CPF',
-            'cnpj' => 'CNPJ',
+            'cpf'      => 'CPF',
+            'cnpj'     => 'CNPJ',
+            'cpf_cnpj' => 'CPF/CNPJ',
         ],
 
         'messages' =>

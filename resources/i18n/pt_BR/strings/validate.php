@@ -21,7 +21,9 @@ return
     'between_fields'                 => 'O valor do campo %1$s deve estar entre os valores dos campos %2$s e %3$s.',
     'unique'                         => 'O conteúdo do campo %1$s já existe.',
     'exists'                         => 'O conteúdo do campo %1$s não existe.',
-
+    'min_age'                        => 'O valor do campo %1$s deve conter uma data maior ou igual a %2$s anos.',
+    'max_age'                        => 'O valor do campo %1$s deve conter uma data menor ou igual a %2$s anos.',
+    'exact_age'                      => 'O valor do campo %1$s deve conter uma data igual a %2$s anos.',
 
     /**
      * Custom overrides.

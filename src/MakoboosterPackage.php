@@ -91,5 +91,11 @@ class MakoboosterPackage extends \mako\application\Package
         $validator->registerPlugin(new \aldoanizio\makobooster\validator\plugins\GreaterThanFieldValidator($request));
 
         $validator->registerPlugin(new \aldoanizio\makobooster\validator\plugins\GreaterThanOrEqualToFieldValidator($request));
+
+        $validator->registerPlugin(new \aldoanizio\makobooster\validator\plugins\MinAgeValidator());
+
+        $validator->registerPlugin(new \aldoanizio\makobooster\validator\plugins\MaxAgeValidator());
+
+        $validator->registerPlugin(new \aldoanizio\makobooster\validator\plugins\ExactAgeValidator());
     }
 }

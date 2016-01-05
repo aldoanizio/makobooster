@@ -16,3 +16,6 @@ $container->get('validator')->registerPlugin(new \makobooster\validator\plugins\
 $container->get('validator')->registerPlugin(new \makobooster\validator\plugins\LessThanOrEqualToFieldValidator($container->get('request')));
 $container->get('validator')->registerPlugin(new \makobooster\validator\plugins\GreaterThanFieldValidator($container->get('request')));
 $container->get('validator')->registerPlugin(new \makobooster\validator\plugins\GreaterThanOrEqualToFieldValidator($container->get('request')));
+$container->get('validator')->registerPlugin(new \makobooster\validator\plugins\MinAgeValidator);
+$container->get('validator')->registerPlugin(new \makobooster\validator\plugins\MaxAgeValidator);
+$container->get('validator')->registerPlugin(new \makobooster\validator\plugins\ExactAgeValidator);

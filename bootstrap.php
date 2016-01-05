@@ -7,6 +7,7 @@
 
 $container->get('validator')->registerPlugin(new \makobooster\validator\plugins\CPFValidator);
 $container->get('validator')->registerPlugin(new \makobooster\validator\plugins\CNPJValidator);
+$container->get('validator')->registerPlugin(new \makobooster\validator\plugins\DocumentoValidator);
 $container->get('validator')->registerPlugin(new \makobooster\validator\plugins\ConfigExistsValidator($this->config));
 $container->get('validator')->registerPlugin(new \makobooster\validator\plugins\DatabaseExistsValidator($this->container->get('database')));
 $container->get('validator')->registerPlugin(new \makobooster\validator\plugins\DatabaseUniqueValidator($this->container->get('database')));
